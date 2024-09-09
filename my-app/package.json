@@ -4,8 +4,12 @@
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gxlvera/ElectronForgeAutoUpdate.git"
+  },
   "scripts": {
-    "start": "electron-forge start",
+    "start": "cross-env NODE_ENV=development electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
@@ -20,6 +24,7 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron/fuses": "^1.8.0",
+    "cross-env": "^7.0.3",
     "electron": "32.0.2"
   },
   "keywords": [],
@@ -29,6 +34,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-log": "^5.2.0",
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-updater": "^6.3.4"
   }
 }

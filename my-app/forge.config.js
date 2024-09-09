@@ -24,6 +24,19 @@ module.exports = {
       config: {},
     },
   ],
+  publishers: [
+    {
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: {
+          owner: 'gxlvera',
+          name: 'ElectronForgeAutoUpdate',
+        },
+        prerelease: false,
+        draft: true,
+      },
+    },
+  ],
   plugins: [
     {
       name: '@electron-forge/plugin-auto-unpack-natives',
