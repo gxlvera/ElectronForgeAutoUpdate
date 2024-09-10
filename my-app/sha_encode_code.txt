@@ -1,0 +1,1 @@
+$hash = Get-FileHash -Algorithm SHA512 -Path "out\make\squirrel.windows\x64\my_app_gxlverahku-1.0.4-full.nupkg"

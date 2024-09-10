@@ -30,13 +30,34 @@ module.exports = {
       config: {
         repository: {
           owner: 'gxlvera',
-          name: 'ElectronForgeAutoUpdate',
+          name: 'gxlvera.github.io',
         },
         prerelease: false,
         draft: true,
+        private: true,
+        authToken: process.env.GITHUB_TOKEN 
       },
     },
   ],
+  hooks: {
+    // 在打包完成后执行该钩子
+    async afterPack(context) {
+      // 创建 app-update.yml 文件的内容
+      const appUpdateConfig = `
+provider: github
+owner: your-github-username
+repo: your-repo-name
+`;
+
+      // 获取打包后的应用路径
+      const appPath = path.join(context.appOutDir, 'resources', 'app-update.yml');
+
+      // 将 app-update.yml 文件写入 resources 目录
+      fs.writeFileSync(appPath, appUpdateConfig);
+      
+      console.log(`app-update.yml successfully created at ${appPath}`);
+    }
+  },
   plugins: [
     {
       name: '@electron-forge/plugin-auto-unpack-natives',

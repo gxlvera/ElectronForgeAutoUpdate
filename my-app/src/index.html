@@ -8,5 +8,35 @@
   <body>
     <h1>💖 Hello World!</h1>
     <p>Welcome to your Electron application.</p>
+    <h2 id="download-status">未进行下载</h2>
+    <script>
+    
+      const { ipcRenderer } = require('electron');
+
+      ipcRenderer.on('autoUpdater-log', (event, message) => {
+        console.log("RECEIVED AUTO_UPDATER LOG")
+        console.log('AutoUpdater Log:', message);  // 将autoUpdater日志输出到 DevTools 控制台
+      });
+      
+
+      // 监听 'download-started' 消息，用户点击下载后，更新界面
+      ipcRenderer.on('download-started', () => {
+        document.getElementById('download-status').innerText = '下载正在进行...';
+      });
+    
+      // 监听 'download-progress' 消息，更新下载进度
+      ipcRenderer.on('download-progress', (event, progressObj) => {
+        const percent = Math.round(progressObj.percent);
+        document.getElementById('download-status').innerText = `下载进度: ${percent}%`;
+      });
+
+      ipcRenderer.on('no-new-version',()=>{
+        document.getElementById('download-status').innerText = '当前已经是最新版本';
+      })
+
+      ipcRenderer.on('download-complete',()=>{
+        document.getElementById('download-status').innerText = '下载完成，将立刻安装重启';
+      })
+    </script>
   </body>
 </html>
